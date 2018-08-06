@@ -12,7 +12,7 @@ def play_groups(play_hosts, groups, hostvars):
     return list(set(_list))
 
 class FilterModule(object):
-    ''' A filter to split a string into a list. '''
+    ''' Returns a list of play groups that are active within a play '''
     def filters(self):
         return {
             'play_groups' : play_groups
