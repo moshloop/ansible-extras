@@ -14,7 +14,6 @@ def nested_element(object, path):
 
     return obj
 
-import q
 def walk_up(tree, path, ignore=[]):
     results = {}
     parts = re.split("\\.|/", path)
