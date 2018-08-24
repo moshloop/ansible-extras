@@ -16,6 +16,7 @@ Ansible Role for creating systemd services, for managing existing services use t
 | **split**(string, separator=' ')              |                                                              |
 | **to_map**(map, key, value)                   |                                                              |
 | **walk_up**(object, path)                     | Walks up an object tree from the lowest level collecting all attributes not available at lower levels |
+| **map_to_entries**(dict, key, value)          | Convert a dict into a list of entries                        |
 
 
 
