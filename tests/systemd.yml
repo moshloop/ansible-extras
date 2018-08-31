@@ -1,0 +1,14 @@
+  - hosts: all
+    # gather_facts: False
+    roles:
+      - ../../ansible-systemd-module
+    tasks:
+
+      - systemd_service:
+          Name: test
+          ExecStart: "/usr/bin/python -m SimpleHTTPServer"
+
+      - systemd:
+          name: test
+          enabled: yes
+          state: started

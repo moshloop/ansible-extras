@@ -33,6 +33,38 @@ Ansible Role for creating systemd services, for managing existing services use t
                 - name: hostname
 ```
 
+#### systemd_service
+**Options**
+```
+OPTIONS (= is mandatory):
+= ExecStart
+= Name
+- Description
+- InstallArgs
+- RestartOn [Default: on-failure]
+- RunAs [Default: root]
+- ServiceArgs
+- UnitArgs
+- WantedBy [Default: multi-user.target]
+- state (Choices: present, absent)[Default: present]
+```
+
+**EXAMPLES**
+```yaml
+  - hosts: all
+    roles:
+      - moshloop.systemd
+    tasks:
+        - systemd_service:
+            Name: test
+            ExecStart: "/usr/bin/nc -l 200"
+        - systemd_service:
+            Name: test
+            ExecStart: "/usr/bin/nc -l 200"
+            UnitArgs:
+                After: networking.service
+```
+
 ### Dependencies
 
 - genisoimage
