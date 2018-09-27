@@ -8,7 +8,7 @@ def dir_exists(file):
     return os.path.isdir(file)
 
 class FilterModule(object):
-    '''Returns tru eif the file exists'''
+    '''Returns true if the file exists'''
     def filters(self):
         return {
             'file_exists' : file_exists,
