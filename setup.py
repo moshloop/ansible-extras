@@ -1,14 +1,15 @@
-
 from subprocess import *
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 from ansible_extras import __version__
 import os
+import shutil
 from os.path import isfile
 
 __name__ = 'ansible-extras'
 cwd = os.getcwd()
 base = __name__
+role_name = base.split('-')[1]
 data_files = []
 for dir in ['library', 'meta', 'filter_plugins']:
   files = []
@@ -20,8 +21,11 @@ for dir in ['library', 'meta', 'filter_plugins']:
 class link_role(install):
     def run(self):
         install.run(self)
-        print (self)
-
+        dist = "%s/%s/%s" % (os.getcwd(), self.install_data,self.config_vars['dist_name'])
+        role = "/etc/ansible/roles/%s" % role_name
+        print ("Renaming %s to %s" % (dist,role))
+        shutil.rmtree(role)
+        os.renames(dist,role)
 
 setup(
     name = __name__,
