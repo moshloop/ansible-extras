@@ -20,12 +20,19 @@ for dir in ['library', 'meta', 'filter_plugins']:
 
 class link_role(install):
     def run(self):
-        install.run(self)
-        dist = "%s/%s/%s" % (os.getcwd(), self.install_data,self.config_vars['dist_name'])
-        role = "/etc/ansible/roles/%s" % role_name
-        print ("Renaming %s to %s" % (dist,role))
-        shutil.rmtree(role)
-        os.renames(dist,role)
+      install.run(self)
+      dist = self.install_data + "/" + role_name
+      if not dist.startswith('/'):
+        dist = "%s/%s" % (os.getcwd(), dist)
+      role = "/etc/ansible/roles/%s" % role_name
+      if os.path.isdir(dist):
+        print ("Renaming %s to %s" % (dist, role))
+        if os.path.isdir(role):
+          print ("cleaning %s" % role)
+          import shutil
+          shutil.rmtree(role)
+        check_output("mkdir -p /etc/ansible/roles", shell=True)
+        os.renames(dist, role)
 
 setup(
     name = __name__,
