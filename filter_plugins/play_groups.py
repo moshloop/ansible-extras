@@ -12,7 +12,7 @@ def play_groups(play_hosts, groups, hostvars):
     return list(set(_list))
 
 class FilterModule(object):
-    ''' Returns a list of play groups that are active within a play '''
+    ''' A filter to list all groups included by limits'''
     def filters(self):
         return {
             'play_groups' : play_groups
